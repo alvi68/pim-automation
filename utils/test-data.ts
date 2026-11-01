@@ -1,10 +1,5 @@
-import { EmployeeData } from '../types/employee';
+import { EmployeeData, LoginDetails } from '../types/employee';
 
-/**
- * Generates unique employee data for each test run.
- * Using Date.now() ensures no collision with data created
- * by other test runs or other users on the shared demo environment.
- */
 export function generateEmployeeData(): EmployeeData {
     const timestamp = Date.now();
 
@@ -12,5 +7,14 @@ export function generateEmployeeData(): EmployeeData {
         firstName: `QA_First_${timestamp}`,
         lastName: `QA_Last_${timestamp}`,
         employeeId: `${timestamp}`.slice(-6)
+    };
+}
+
+export function generateLoginDetails(): LoginDetails {
+    const unique = `${Date.now()}${Math.floor(Math.random() * 1000)}`;
+
+    return {
+        username: `qa_user_${unique}`,
+        password: `Qa@${unique}`
     };
 }
