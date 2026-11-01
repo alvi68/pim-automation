@@ -22,7 +22,7 @@ test.describe('Add Employee', () => {
     await expect(addEmployeePage.toast(Messages.SAVED_SUCCESSFULLY)).toBeVisible();
   });
 
-  test.only('creates a new employee with username, password, and profile image', async () => {
+  test('creates a new employee with username, password, and profile image', async () => {
   const employee = generateEmployeeData();
   const login = generateLoginDetails();
 
