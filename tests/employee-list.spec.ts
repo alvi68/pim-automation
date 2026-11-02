@@ -5,7 +5,7 @@ import { Messages } from '../data/messages.data';
 import { generateEmployeeData } from '../utils/test-data';
 import { EmployeeData } from '../types/employee';
 
-test.describe('Search Employee', () => {
+test.describe('Employee -Search-Delete', () => {
   let employee: EmployeeData;
   let viewEmployeeListPage: ViewEmployeeListPage;
 
@@ -36,4 +36,14 @@ test.describe('Search Employee', () => {
     await expect(row).toHaveCount(1);
     await expect(row).toContainText(employee.firstName);
   });
+
+test('deleted employee can no longer be found', async () => {
+  await viewEmployeeListPage.searchByEmployeeId(employee.employeeId);
+  await expect(viewEmployeeListPage.employeeRow(employee.employeeId)).toHaveCount(1);
+
+  await viewEmployeeListPage.deleteEmployee(employee.employeeId);
+  await expect(viewEmployeeListPage.employeeRow(employee.employeeId)).toHaveCount(0);
+
+});
+  
 });
