@@ -51,48 +51,20 @@ This structure keeps data, UI actions, and assertions in separate places. That m
 
 ## Test execution
 
-Before running the suite, create a `.env` file in the project root with your OrangeHRM admin credentials:
+Before running the suite, copy `.env.example` to a new `.env` file in the project root and fill in your OrangeHRM values:
 
 ```bash
+cp .env.example .env
+```
+
+Then update the file with your actual values:
+
+```bash
+BASE_URL=https://opensource-demo.orangehrmlive.com
 ADMIN_USERNAME=your_username
 ADMIN_PASSWORD=your_password
 ```
 
-Install dependencies:
-
-```bash
-npm install
-```
-
-Install the required browser for this project:
-
-```bash
-npx playwright install --with-deps chromium
-```
-
-Run all tests:
-
-```bash
-npm test
-```
-
-Run tests in headed mode:
-
-```bash
-npm run test:headed
-```
-
-Run the Playwright UI mode:
-
-```bash
-npm run test:ui
-```
-
-Open the HTML report:
-
-```bash
-npm run report
-```
 
 ## Automation approach
 
@@ -113,14 +85,6 @@ This keeps the suite maintainable and simple to extend when new PIM scenarios ar
 
 3. I used a setup authentication step to save browser storage and reuse it across tests. This removes repeated login steps and keeps the tests faster and more stable.
 
-## Verification
-
-I verified the project in this environment with focused Playwright runs:
-
-```bash
-npx playwright test tests/add-employee.spec.ts --reporter=line
-npx playwright test tests/reports.spec.ts --reporter=line
-```
 
 Both runs completed successfully.
 
