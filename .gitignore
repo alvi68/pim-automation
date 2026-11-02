@@ -13,5 +13,24 @@ node_modules/
 # IDE
 .vscode/
 
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+/setup/.auth/
+
+
+
+# IDE
+.vscode/
+
 # Environment variables
 .env
+/reports/
+
+# Generated reports
+/reports/
