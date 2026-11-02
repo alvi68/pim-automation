@@ -34,7 +34,7 @@ test.describe('Employee workflow', () => {
 
         await detailsPage.editName(updatedFirstName, updatedLastName);
         await detailsPage.save();
-        // await expect(detailsPage.toast(Messages.UPDATED_SUCCESSFULLY)).toBeVisible();
+        await expect(detailsPage.toast(Messages.UPDATED_SUCCESSFULLY)).toBeVisible();
 
 
         await page.reload();

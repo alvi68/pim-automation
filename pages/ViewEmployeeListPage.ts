@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import { ConfirmDialog } from '../components/ConfirmDialog';
 
 export class ViewEmployeeListPage {
     private readonly page: Page;
@@ -8,7 +9,7 @@ export class ViewEmployeeListPage {
     private readonly employeeNameInput: Locator;
     private readonly deleteIconButton: Locator;
     private readonly editIconButton: Locator;
-    private readonly confirmDeleteButton: Locator;
+  private readonly confirmDialog: ConfirmDialog;
 
 
 
@@ -25,8 +26,10 @@ export class ViewEmployeeListPage {
             .filter({ has: page.getByText('Employee Name', { exact: true }) })
             .getByPlaceholder('Type for hints...');
         this.deleteIconButton = page.locator('button:has(i.bi-trash)');
-        this.confirmDeleteButton = page.getByRole('button', { name: 'Yes, Delete' });
         this.editIconButton = page.locator('button:has(i.bi-pencil-fill)');
+
+            this.confirmDialog = new ConfirmDialog(page);
+
 
     }
 
@@ -56,7 +59,7 @@ export class ViewEmployeeListPage {
 
     async deleteEmployee(employeeId: string): Promise<void> {
         await this.employeeRow(employeeId).locator(this.deleteIconButton).click();
-        await this.confirmDeleteButton.click();
+        await this.confirmDialog.confirmDelete();
     }
 
 

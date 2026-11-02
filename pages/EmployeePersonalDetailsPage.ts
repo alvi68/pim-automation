@@ -1,31 +1,28 @@
 import { Page, Locator } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class EmployeePersonalDetailsPage {
-  private readonly page: Page;
-  readonly firstNameInput: Locator;
-  readonly lastNameInput: Locator;
-  private readonly saveButton: Locator;
 
-  constructor(page: Page) {
-    this.page = page;
-    this.firstNameInput = page.getByRole('textbox', { name: 'First Name' });
-    this.lastNameInput = page.getByRole('textbox', { name: 'Last Name' });
-    this.saveButton = page
-      .locator('form')
-      .filter({ has: this.firstNameInput })
-      .getByRole('button', { name: 'Save' });
-  }
+export class EmployeePersonalDetailsPage extends BasePage {
+    readonly firstNameInput: Locator;
+    readonly lastNameInput: Locator;
+    private readonly saveButton: Locator;
 
-  async editName(firstName: string, lastName: string): Promise<void> {
-    await this.firstNameInput.fill(firstName);
-    await this.lastNameInput.fill(lastName);
-  }
+    constructor(page: Page) {
+        super(page);
+        this.firstNameInput = page.getByRole('textbox', { name: 'First Name' });
+        this.lastNameInput = page.getByRole('textbox', { name: 'Last Name' });
+        this.saveButton = page
+            .locator('form')
+            .filter({ has: this.firstNameInput })
+            .getByRole('button', { name: 'Save' });
+    }
 
-  async save(): Promise<void> {
-    await this.saveButton.click();
-  }
+    async editName(firstName: string, lastName: string): Promise<void> {
+        await this.firstNameInput.fill(firstName);
+        await this.lastNameInput.fill(lastName);
+    }
 
-  toast(message: string): Locator {
-    return this.page.getByText(message, { exact: true });
-  }
+    async save(): Promise<void> {
+        await this.saveButton.click();
+    }
 }

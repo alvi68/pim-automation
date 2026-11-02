@@ -1,8 +1,9 @@
 import { Page, Locator } from '@playwright/test';
 import { EmployeeData } from '../types/employee';
+import { BasePage } from './BasePage';
 
-export class AddEmployeePage {
-  private readonly page: Page;
+
+export class AddEmployeePage extends BasePage {
   private readonly firstNameInput: Locator;
   private readonly lastNameInput: Locator;
   private readonly employeeIdInput: Locator;
@@ -14,7 +15,7 @@ export class AddEmployeePage {
   private readonly confirmPasswordInput: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.firstNameInput = page.getByRole('textbox', { name: 'First Name' });
     this.lastNameInput = page.getByRole('textbox', { name: 'Last Name' });
     this.employeeIdInput = page
@@ -37,7 +38,7 @@ export class AddEmployeePage {
       .locator('.oxd-input-group')
       .filter({ has: page.getByText('Confirm Password', { exact: true }) })
       .locator('input[type="password"]');
-      this.profileImageInput = page.locator('input[type="file"]');
+    this.profileImageInput = page.locator('input[type="file"]');
 
 
   }
@@ -60,10 +61,6 @@ export class AddEmployeePage {
 
   async save(): Promise<void> {
     await this.saveButton.click();
-  }
-
-  toast(message: string): Locator {
-    return this.page.getByText(message, { exact: true });
   }
 
   async uploadProfileImage(filePath: string): Promise<void> {
