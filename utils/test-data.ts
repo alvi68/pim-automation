@@ -18,3 +18,7 @@ export function generateLoginDetails(): LoginDetails {
         password: `Qa@${unique}`
     };
 }
+
+export function generateReportName(): string {
+  return `QA_Report_${Date.now()}${Math.floor(Math.random() * 1000)}`;
+}

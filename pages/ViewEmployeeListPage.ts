@@ -9,7 +9,7 @@ export class ViewEmployeeListPage {
     private readonly employeeNameInput: Locator;
     private readonly deleteIconButton: Locator;
     private readonly editIconButton: Locator;
-  private readonly confirmDialog: ConfirmDialog;
+    private readonly confirmDialog: ConfirmDialog;
 
 
 
@@ -28,7 +28,7 @@ export class ViewEmployeeListPage {
         this.deleteIconButton = page.locator('button:has(i.bi-trash)');
         this.editIconButton = page.locator('button:has(i.bi-pencil-fill)');
 
-            this.confirmDialog = new ConfirmDialog(page);
+        this.confirmDialog = new ConfirmDialog(page);
 
 
     }
